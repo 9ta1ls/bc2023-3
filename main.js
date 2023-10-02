@@ -10,7 +10,15 @@ fs.readFile("data.json", (err,data)=>{
                 index = i;
             }
         }
-        console.log(jsonArr[index].txt+":" + min);
+        let jsonStr = jsonArr[index].txt+ ":" + min;
+       fs.writeFile("output.txt",jsonStr, (err)=>{
+        if(err===null){
+            console.log('Дані були успішно записані у файл.');
+        }
+        else{
+            console.error('Помилка під час запису у файл:', err);
+        }
+       });
     }
     else{
         console.log(err);
