@@ -3,14 +3,9 @@ fs.readFile("data.json", (err,data)=>{
     if(err===null){
         const jsonArr = JSON.parse(data);
         let index = 0;
-        let min = jsonArr[0].value;
-        for (let i = 1; i < jsonArr.length;i++){
-            if(jsonArr[i].value < min){
-                min = jsonArr[i].value;
-                index = i;
-            }
-        }
-        let jsonStr = jsonArr[index].txt+ ":" + min;
+        let jsonArrMin = jsonArr.reduce((min, obj)=>(obj.value < min.value ? obj: min),jsonArr[0]);
+
+        let jsonStr = jsonArrMin.txt+ ":" + jsonArrMin.value;
        fs.writeFile("output.txt",jsonStr, (err)=>{
         if(err===null){
         }
